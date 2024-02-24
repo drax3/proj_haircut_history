@@ -4,6 +4,9 @@ services:
   web2:
     build: .
     command: python /code/manage.py runserver 0.0.0.0:8000
+    environment:
+      - SECRET_KEY=^*c1mr*n*o0*9i%h7r%@4)c+o3^3^^)k@48gsf9uomdb4i4!1x
+      - DEBUG=1
     volumes:
       - .:/code
 
