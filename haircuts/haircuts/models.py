@@ -1,7 +1,8 @@
 import uuid
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.urls import reverse
-
+from django.contrib.auth import get_user_model
 
 class Haircut(models.Model):
     id     = models.UUIDField(
@@ -19,3 +20,18 @@ class Haircut(models.Model):
     
     def get_absolute_url(self):
         return reverse('haircut_detail', args=[str(self.id)])
+    
+class Rating(models.Model):
+    haircut = models.ForeignKey(
+        Haircut,
+        on_delete=models.CASCADE,
+        related_name='ratings',
+    )
+    rating = models.IntegerField(validators=[MinValueValidator(0)])
+    barber = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return str(self.rating)

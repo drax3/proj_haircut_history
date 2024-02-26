@@ -7,5 +7,15 @@
 <p>Barber: {{ haircut.barber }}</p>
 <p>Author: {{ haircut.price }}</p>
 <p>Price: {{ haircut.date }}</p>
+<div>
+    <h3>RATING</h3>
+    <ul>
+        {% for rating in haircut.ratings.all %}
+        <li>Rating: {{ rating.rating }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
 </div>
 {% endblock content %}
