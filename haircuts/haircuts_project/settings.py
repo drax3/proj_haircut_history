@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'haircuts.apps.HaircutsConfig',
 ]
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

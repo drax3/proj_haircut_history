@@ -1,0 +1,10 @@
+<!-- templates/haircuts/book_list.html -->
+{% extends '_base.html' %}
+{% block title %}Haircuts{% endblock title %}
+{% block content %}
+{% for haircut in haircut_list %}
+<div>
+<h2><a href="{{ haircut.get_absolute_url }}">{{ haircut.barber }}</a></h2>
+</div>
+{% endfor %}
+{% endblock content %}

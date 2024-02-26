@@ -1,0 +1,11 @@
+<!-- templates/haircuts/haircut_detail.html -->
+{% extends '_base.html' %}
+{% block title %}{{ haircut.barber }}{% endblock title %}
+{% block content %}
+<div class="haircut-detail">
+<h2><a href="">{{ haircut.shop }}</a></h2>
+<p>Barber: {{ haircut.barber }}</p>
+<p>Author: {{ haircut.price }}</p>
+<p>Price: {{ haircut.date }}</p>
+</div>
+{% endblock content %}
