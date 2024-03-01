@@ -3,11 +3,26 @@
 {% block title %}{{ haircut.barber }}{% endblock title %}
 {% block content %}
 <div class="haircut-detail">
-<h2><a href="">{{ haircut.shop }}</a></h2>
-<p>Barber: {{ haircut.barber }}</p>
-<p>Author: {{ haircut.price }}</p>
-<p>Price: {{ haircut.date }}</p>
-<div>
+    <h2><a href="">{{ haircut.barber }}</a></h2>
+
+    <div class="cutphotos-detail">
+        {% if haircut.cutside1 %}
+        <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
+        <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
+        <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
+        {% else %}
+        <img src="/media/default-image.png" alt="Default image 1">
+        <img src="/media/default-image.png" alt="Default image 1">
+        <img src="/media/default-image.png" alt="Default image 1">
+        {% endif %}
+    </div>
+    <p>Barber: {{ haircut.shop }}</p>
+    <p>Author: {{ haircut.price }}</p>
+    <p>Price: {{ haircut.date }}</p>
+
+
+</div>
+<div class="rating-details">
     <h3>RATING</h3>
     <ul>
         {% for rating in haircut.ratings.all %}
@@ -17,5 +32,4 @@
 </div>
 
 
-</div>
 {% endblock content %}

@@ -6,8 +6,18 @@
 <div>
 <h2><a href="{{ haircut.get_absolute_url }}">{{ haircut.barber }}</a></h2>
 <div class="ratings">
+    <div class="cutphotos">
+        {% if haircut.cutside1 %}
+        <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
+        <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
+        <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
+        {% else %}
+        <img src="/media/default-image.png" alt="Default image 1">
+        <img src="/media/default-image.png" alt="Default image 1">
+        <img src="/media/default-image.png" alt="Default image 1">
+        {% endif %}
+    </div>
     <p>Average Rating: {{ haircut.avg_rating|default:"N/A" }}</p>
-    <p>Last Rating: {{ haircut.last_rating|default:"N/A" }}</p>
 </div>
 </div>
 {% endfor %}

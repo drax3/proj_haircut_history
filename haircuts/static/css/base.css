@@ -5,6 +5,41 @@ h1 {
 }
 
 .ratings {
-    display: inline-block;
+    /* display: inline-block; */
     margin-left: 20px;
+}
+
+
+.cutphotos {
+    display: flex; /* Display photos in a row */
+    align-items: center;
+}
+
+.cutphotos img {
+    width: 120px; /* Set the width of each image */
+    height: 120px; /* Set the height of each image */
+    margin-right: 5px; /* Add spacing between each image */
+    object-fit: cover;
+    background-image: url('/media/cuts/default-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cutphotos img.has-photo {
+    background-image: none; /* Remove the background image for images with a photo */
+}
+
+.cutphotos-detail img {
+    width: 200px; /* Set the width of each image */
+    height: 200px; /* Set the height of each image */
+    margin-right: 20px; /* Add spacing between each image */
+    object-fit: cover;
+    background-image: url('/media/cuts/default-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.cutphotos-detail img.has-photo {
+    background-image: none; /* Remove the background image for images with a photo */
 }

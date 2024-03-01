@@ -14,12 +14,15 @@ class Haircut(models.Model):
     shop   = models.CharField(max_length=200)
     price  = models.DecimalField(max_digits=6, decimal_places=2)
     date   = models.DateTimeField()
+    cutside1 = models.ImageField(upload_to='cuts/', blank=True)
+    cutside2 = models.ImageField(upload_to='cuts/', blank=True)
+    cutside3 = models.ImageField(upload_to='cuts/', blank=True)
 
     def __str__(self):
         return self.barber
     
     def get_absolute_url(self):
-        return reverse('haircut_detail', args=[str(self.id)])
+        return reverse('haircut_detail', kwargs={'pk':str(self.id)})
     
 class Rating(models.Model):
     haircut = models.ForeignKey(

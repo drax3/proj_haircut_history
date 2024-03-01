@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.db.models import Avg
-
+from django.urls import reverse_lazy
+from .forms import HaircutForm
 from .models import Haircut, Rating
 
 class HaircutListView(ListView):
@@ -23,3 +24,11 @@ class HaircutDetailView(DetailView):
     model = Haircut
     context_object_name = 'haircut'
     template_name = 'haircuts/haircut_detail.html'
+
+
+class AddHaircutView(CreateView):
+    model = Haircut
+    form_class = HaircutForm
+    template_name = 'haircuts/add_haircut.html'
+    success_url = reverse_lazy('haircut_list')
+
