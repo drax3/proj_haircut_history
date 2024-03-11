@@ -7,18 +7,27 @@
 
     <div class="cutphotos-detail">
         {% if haircut.cutside1 %}
-        <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
-        <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
-        <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
+            <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
         {% else %}
-        <img src="/media/default-image.png" alt="Default image 1">
-        <img src="/media/default-image.png" alt="Default image 1">
-        <img src="/media/default-image.png" alt="Default image 1">
+            <img src="/media/default-image.png" alt="Default image 1">
+        {% endif %}
+    
+        {% if haircut.cutside2 %}
+            <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
+        {% else %}
+            <img src="/media/default-image.png" alt="Default image 2">
+        {% endif %}
+    
+        {% if haircut.cutside3 %}
+            <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
+        {% else %}
+            <img src="/media/default-image.png" alt="Default image 3">
         {% endif %}
     </div>
+    
     <p>Barber: {{ haircut.shop }}</p>
-    <p>Author: {{ haircut.price }}</p>
-    <p>Price: {{ haircut.date }}</p>
+    <p>Price: {{ haircut.price }}</p>
+    <p>Date: {{ haircut.date }}</p>
 
 
 </div>
