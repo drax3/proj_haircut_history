@@ -1,11 +1,12 @@
 <!-- templates/haircuts/add_haircut.html -->
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}Add New Haircut{% endblock title %}
 {% block content %}
 <h1>Add New Haircut</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <button type="submit">Save</button>
 </form>
 {% endblock content %}
