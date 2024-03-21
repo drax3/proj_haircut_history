@@ -3,21 +3,27 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 class Haircut(models.Model):
-    id     = models.UUIDField(
+    id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False
     )
     barber = models.CharField(max_length=200)
-    shop   = models.CharField(max_length=200)
-    price  = models.DecimalField(max_digits=6, decimal_places=2)
-    date   = models.DateField()
+    shop = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    date = models.DateField()
     # date_of_cut = models.DateField()
     cutside1 = models.ImageField(upload_to='cuts/', blank=True)
     cutside2 = models.ImageField(upload_to='cuts/', blank=True)
     cutside3 = models.ImageField(upload_to='cuts/', blank=True)
+    # person = models.ForeignKey(
+    #     settings.AUTH_USER_MODEL,
+    #     on_delete=models.CASCADE,
+    # )
+
 
     def __str__(self):
         return self.barber
@@ -32,10 +38,9 @@ class Rating(models.Model):
         related_name='ratings',
     )
     rating = models.IntegerField(validators=[MinValueValidator(0)])
-    barber = models.ForeignKey(
+    person = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
     )
-
     def __str__(self):
         return str(self.rating)

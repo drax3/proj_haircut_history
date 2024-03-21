@@ -1,5 +1,6 @@
 <!-- templates/haircuts/haircut_detail.html -->
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}{{ haircut.barber }}{% endblock title %}
 {% block content %}
 <div class="haircut-detail">
@@ -38,6 +39,13 @@
         <li>Rating: {{ rating.rating }}</li>
         {% endfor %}
     </ul>
+    
+<!-- Rating form -->
+<form method="post" action="{% url 'haircut_detail' pk=haircut.id %}">
+    {% csrf_token %}
+    {{ rating_form|crispy }}
+    <button class="btn btn-success" type="submit">ADD</button>
+</form>
 </div>
 
 
