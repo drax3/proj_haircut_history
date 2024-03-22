@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.conf import settings
+import datetime
 
 class Haircut(models.Model):
     id = models.UUIDField(
@@ -11,10 +12,10 @@ class Haircut(models.Model):
         default=uuid.uuid4,
         editable=False
     )
-    barber = models.CharField(max_length=200)
+    barber = models.CharField(default='balu bhai',max_length=200)
     shop = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    date = models.DateField()
+    date = models.DateField(default=datetime.date.today)
     # date_of_cut = models.DateField()
     cutside1 = models.ImageField(upload_to='cuts/', blank=True)
     cutside2 = models.ImageField(upload_to='cuts/', blank=True)
