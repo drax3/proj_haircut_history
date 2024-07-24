@@ -1,9 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.http import JsonResponse
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, 
+    UserPassesTestMixin
+)
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from django.db.models import Avg
+
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+
 from .forms import HaircutForm, RatingForm
 from .models import Haircut, Rating
 
@@ -21,6 +28,7 @@ class HaircutListView(LoginRequiredMixin,ListView):
             haircut.avg_rating = int(avg_rating) if avg_rating is not None else None
             latest_rating = Rating.objects.filter(haircut=haircut).order_by('-id').first()
             haircut.last_rating = latest_rating.rating if latest_rating else None
+
         return context
 
 
@@ -53,3 +61,24 @@ class AddHaircutView(LoginRequiredMixin,CreateView):
     success_url = reverse_lazy('haircut_list')
     login_url = 'account_login'
 
+    # def form_valid(self, form):
+    #     form.instance.username = self.request.user
+    #     return super().form_valid(form)
+    
+    def form_valid(self, form):
+        form.instance.person = self.request.user
+        return super().form_valid(form)
+
+
+class HaircutDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Haircut
+    template_name = 'haircuts/haircut_delete.html'
+    success_url = reverse_lazy('haircut_list')
+    login_url = 'login'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.person == self.request.user
+    
+    def handle_no_permission(self):
+        return JsonResponse({'error_message': 'You are not authorized to delete this object.'})

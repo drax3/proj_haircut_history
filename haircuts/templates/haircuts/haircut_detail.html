@@ -36,7 +36,7 @@
     <h3>RATING</h3>
     <ul>
         {% for rating in haircut.ratings.all %}
-        <li>Rating: {{ rating.rating }}</li>
+        <li>{{ rating.person }}: {{ rating.rating }}</li>
         {% endfor %}
     </ul>
     

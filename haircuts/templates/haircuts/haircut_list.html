@@ -3,31 +3,47 @@
 {% block title %}Haircuts{% endblock title %}
 {% block content %}
 {% for haircut in haircut_list %}
-<div>
-<h2><a href="{{ haircut.get_absolute_url }}">{{ haircut.barber }}</a></h2>
-<div class="ratings">
+<div class="card">
+<div class="card-header">
+<span class="font-weight-bold"><a href="{{ haircut.get_absolute_url }}">  {{ haircut.barber }}</a></span> &middot;
+<span class="text-muted">by {{ haircut.person }} | {{ haircut.date }}</span>
+</div>
+<div class="card-body">
     <div class="cutphotos">
-        {% if haircut.cutside1 %}
-            <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
-        {% else %}
-            <img src="/media/default-image.png" alt="Default image 1">
-        {% endif %}
-    
-        {% if haircut.cutside2 %}
-            <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
-        {% else %}
-            <img src="/media/default-image.png" alt="Default image 2">
-        {% endif %}
-    
-        {% if haircut.cutside3 %}
-            <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
-        {% else %}
-            <img src="/media/default-image.png" alt="Default image 3">
-        {% endif %}
+        <div class="grid-container">
+            <div class="grid-item">
+                {% if haircut.cutside1 %}
+                <img src="{{ haircut.cutside1.url }}" alt="Photo 1">
+                <p>Left</p>
+                {% endif %}
+            </div>
+            <div class="grid-item">
+                {% if haircut.cutside2 %}
+                <img src="{{ haircut.cutside2.url }}" alt="Photo 2">
+                <p>Front</p>
+                {% endif %}
+            </div>
+            <div class="grid-item">
+                {% if haircut.cutside3 %}
+                <img src="{{ haircut.cutside3.url }}" alt="Photo 3">
+                <p>Right</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    
-    <p>Average Rating: {{ haircut.avg_rating|default:"N/A" }}</p>
+<!-- Changes start here! -->
+<a href="#">Edit</a> |
+<a href="{% url 'haircut_delete' haircut.pk %}">Delete</a>
+</div>
+<div class="card-footer">
+<p>
+<span class="font-weight-bold"> Rating &middot;</span>
+{{ haircut.avg_rating|default:"N/A" }}
+</p>
+
 </div>
 </div>
+<br />
+
 {% endfor %}
 {% endblock content %}

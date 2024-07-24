@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -20,10 +20,11 @@ class Haircut(models.Model):
     cutside1 = models.ImageField(upload_to='cuts/', blank=True)
     cutside2 = models.ImageField(upload_to='cuts/', blank=True)
     cutside3 = models.ImageField(upload_to='cuts/', blank=True)
-    # person = models.ForeignKey(
-    #     settings.AUTH_USER_MODEL,
-    #     on_delete=models.CASCADE,
-    # )
+    person = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=True
+    )
 
 
     def __str__(self):
@@ -38,10 +39,14 @@ class Rating(models.Model):
         on_delete=models.CASCADE,
         related_name='ratings',
     )
-    rating = models.IntegerField(validators=[MinValueValidator(0)])
+    rating = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     person = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
     )
+
     def __str__(self):
         return str(self.rating)
+    
+    def get_absolute_url(self):
+        return reverse('haircut_detail', kwargs={'pk':str(self.id)})

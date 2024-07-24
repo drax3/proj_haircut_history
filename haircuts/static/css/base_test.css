@@ -1,0 +1,55 @@
+
+/* static/css/base.css */
+h1 {
+    color: blue;
+}
+
+.ratings {
+    /* display: inline-block; */
+    margin-left: 20px;
+}
+
+/* .cutphotos img {
+    width: 120px; 
+    height: 120px; 
+    margin-right: 5px;  */
+    /* object-fit: cover;
+    background-image: url('/media/cuts/default-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+
+/* .cutphotos img.has-photo {
+    background-image: none;
+} */
+
+/* .cutphotos-detail img {
+    width: 100px; 
+    height: 100px; 
+    margin-right: 10px; 
+    object-fit: cover;
+    background-image: url('/media/cuts/default-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+} */
+
+/* .cutphotos-detail img.has-photo {
+    background-image: none;
+} */
+
+
+.cutphotos {
+    display: flex;
+    justify-content: space-around;  /* Space items evenly */
+    margin-top: 20px;
+}
+
+.photo-item {
+    text-align: center;  /* Center the text under each image */
+}
+
+.photo-item img {
+    max-width: 100%;  /* Ensures the image doesn't overflow */
+    height: auto;
+}

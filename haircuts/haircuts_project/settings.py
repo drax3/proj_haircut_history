@@ -46,11 +46,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
+    'rest_framework',
 
     # local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'haircuts.apps.HaircutsConfig',
+    'api_v2',
 ]
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -78,6 +80,12 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

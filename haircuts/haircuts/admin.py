@@ -4,6 +4,7 @@ from .models import Haircut, Rating
 
 class RatingInline(admin.TabularInline):
     model = Rating
+    extra = 0
 
 class HaicutAdmin(admin.ModelAdmin):
     inlines = [
@@ -13,7 +14,8 @@ class HaicutAdmin(admin.ModelAdmin):
         return obj.ratings.aggregate(avg_rating=Avg('rating'))['avg_rating']
     avg_rating.short_description = 'Average Rating'
 
-    list_display = ("barber", "shop", "price", "date", "avg_rating")
+    list_display = ("barber", "shop", "date", "avg_rating")
 
 
 admin.site.register(Haircut, HaicutAdmin)
+admin.site.register(Rating)
